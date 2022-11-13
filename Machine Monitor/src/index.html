@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Machine Monitor</title>
+    <script type="module" src="/main.js" defer></script>
+  </head>
+
+<body>
+
+  <div class="main">
+    <div class="monitor-view" id="temp">
+      <div class="percentage-circle" id="temp-circle">
+        <div class="large-text" id="temp-text">TEMP</div>
+      </div>
+    </div>
+
+    <div class="monitor-view" id="cpu-util">
+      <div class="percentage-circle" id="cpu-circle">
+        <div class="small-text" id="cpu-text">CPU</div>
+      </div>
+    </div>
+
+    <div class="monitor-view" id="memory">
+      <div class="percentage-circle" id="memory-circle">
+        <div class="small-text" id="memory-text">MEMORY</div>
+      </div>
+    </div>
+
+    <div class="monitor-view" id="network">
+      <div class="percentage-circle" id="memory-circle">
+        <div class="small-text" id="memory-text">NETWORK</div>
+      </div>
+    </div>
+
+    <div class="monitor-view" id="gpu-util">
+      <div class="percentage-circle" id="memory-circle">
+        <div class="small-text" id="memory-text">GPU</div>
+      </div>
+    </div>
+
+    <div class="monitor-view" id="button">
+      <div class="percentage-circle" id="memory-circle">
+        <button id="update-button" type="button">UPDATE</button>
+        <!-- <div class="small-text" id="memory-text">BUTTON</div> -->
+      </div>
+    </div>
+  </div>
+
+</body>
+
+
+  <!-- <body>
+    <div class="container">
+      <h1>Welcome to Tauri!</h1>
+
+      <div class="row">
+        <a href="https://tauri.app" target="_blank">
+          <img src="/assets/tauri.svg" class="logo tauri" alt="Tauri logo" />
+        </a>
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+          target="_blank"
+        >
+          <img
+            src="/assets/javascript.svg"
+            class="logo vanilla"
+            alt="JavaScript logo"
+          />
+        </a>
+      </div>
+
+      <p>Click on the Tauri logo to learn more about the framework</p>
+
+      <div class="row">
+        <div>
+          <input id="greet-input" placeholder="Enter a name..." />
+          <button id="greet-button" type="button">Greet</button>
+        </div>
+      </div>
+
+      <p id="greet-msg"></p>
+    </div>
+  </body> -->
+</html>

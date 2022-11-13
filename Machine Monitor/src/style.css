@@ -1,0 +1,146 @@
+:root {
+  
+  /* font-family: Inter, Avenir, Helvetica, Arial, sans-serif; */
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color: #0f0f0f;
+  background-color: #252525;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+@font-face {
+  font-family: 'FiraCode'; /*a name to be used later*/
+  src: local('/assets/fonts/FiraCode.ttf'); /*URL to font*/
+}
+
+.nav {
+  grid-area: nav;
+  background-color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  /* padding: 5px 5px; */
+  font-size: 15px;
+  /* border-radius: 10px; */
+  height: 1fr;  
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#temp {
+  grid-area: temp;
+  height: 400px;
+  width: 400px;
+}
+
+#cpu-util {
+  grid-area: cpu-util;
+}
+
+#memory {
+
+  grid-area: memory;
+}
+
+#network {
+  grid-area: network;
+}
+
+#gpu-util {
+  grid-area: gpu;
+}
+
+#button {
+  grid-area: button;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: #0f0f0f;
+  background-color: rgb(90, 45, 135);
+  transition: border-color 0.25s;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  margin: 0;
+  position: relative;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+}
+
+button:hover {
+  border-color: #396cd8;
+}
+
+.main {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: grid;
+  grid-area: main;
+  grid-template-columns: 1fr 1fr 1fr ;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: 
+  'temp temp cpu-util'
+  'temp temp memory'
+  'network gpu button';
+  background-color: rgba(255, 255, 255, 0.0);
+  text-align: center;
+  width: fit-content;
+  height: fit-content;
+  font-size: 15px;
+}
+
+.monitor-view {
+  height: 200px;
+  width: 200px;
+  text-align: center;
+  
+  border-color: #252525;
+  border-style: solid;
+  background-color: #000;
+}
+
+.percentage-circle {
+  height: 90%;
+  width: 90%;
+  background-color: rgba(255, 255, 255, 0.0);
+  border-radius: 50%;
+  border-color: aliceblue;
+  border-width: 10px;
+  border-style: solid;
+  margin: 0;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.large-text {
+  font-size: 60px;
+}
+
+.small-text {
+  font-size: 24px;
+}
+
+.percentage-circle > div {
+  margin: auto;
+  position: fixed;
+  color: rebeccapurple;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
