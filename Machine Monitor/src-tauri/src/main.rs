@@ -3,20 +3,11 @@
     windows_subsystem = "windows"
 )]
 
-// use tauri::{Manager, Window};
-// use std::{slice::SliceIndex, collections::HashMap};
-// use wmi::{COMLibrary, WMIConnection, Variant};
-
-// #[derive(Clone, serde::Serialize)]
-// struct Payload {
-//   message: String,
-// }
-
-
 
 #[tauri::command]
 fn get_temp() -> String {
-    println!("I was invoked!!");
+    println!("get_temp was invoked!!");
+    "temp-string".to_string()
     // let wmi = init_wmi_connection();
 
     // let results: Vec<HashMap<String, Variant>> = wmi
@@ -37,7 +28,7 @@ fn get_temp() -> String {
 
     // }
     // c_temp.to_string()
-    "temp-string".to_string()
+   
 }
 
 #[tauri::command]
