@@ -10,9 +10,10 @@ async function greet() {
 }
 
 async function update() {
+  console.log("update called");
   tempEl.textContent = await invoke("get_temp");
-  cpuUtilEl.textContent = await invoke("get_cpu_util");
-  memoryEl.textContent = await invoke("get_memory");
+  // cpuUtilEl.textContent = await invoke("get_cpu_util");
+  // memoryEl.textContent = await invoke("get_memory");
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
