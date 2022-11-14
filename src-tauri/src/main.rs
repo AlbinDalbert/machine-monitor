@@ -4,6 +4,7 @@
 )]
 use wmi::{COMLibrary, WMIConnection, Variant};
 use std::{slice::SliceIndex, collections::HashMap};
+use tokio::spawn;
 
 fn main() {
 
@@ -12,6 +13,7 @@ fn main() {
         .invoke_handler(tauri::generate_handler![get_temp, get_cpu_util, get_memory])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+
 }
 
 #[tauri::command]
