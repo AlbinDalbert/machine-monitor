@@ -11,7 +11,7 @@ async function greet() {
 
 async function update() {
   console.log("update called");
-  tempEl.textContent = await invoke("get_temp");
+  tempEl.textContent = await invoke("process");
   // cpuUtilEl.textContent = await invoke("get_cpu_util");
   // memoryEl.textContent = await invoke("get_memory");
 }
