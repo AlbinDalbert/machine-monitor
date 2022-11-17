@@ -7,6 +7,7 @@
 use std::{collections::HashMap, thread, time::{self, Duration}, sync::mpsc::{Sender, SyncSender}};
 use std::sync::mpsc::channel;
 use std::result::Result::Ok;
+use tauri::Manager;
 use qmstats::*;
 
 fn main() {
@@ -14,6 +15,27 @@ fn main() {
     println!("program started");
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![process])
+        .setup(|app| {
+            // let app_handle = app_handle();
+            tauri::async_runtime::spawn(async {
+
+                thread::sleep(Duration::new(5,0));
+
+                let (tx, rx) = channel::<Measurement>();
+                let sleep_dur = Duration::new(1, 0);
+            
+                init_measurement_thread(tx, sleep_dur);
+            
+                loop {
+                    
+                    let res = rx.recv().unwrap();
+            
+                    println!("{res:?}");
+            
+                }
+            });
+            Ok(())
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 
@@ -21,6 +43,8 @@ fn main() {
 
 #[tauri::command]
 async fn process() {
+    
+
     let (tx, rx) = channel::<Measurement>();
     let sleep_dur = Duration::new(1, 0);
 

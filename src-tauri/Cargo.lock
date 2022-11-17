@@ -2156,7 +2156,7 @@ dependencies = [
 [[package]]
 name = "qmstats"
 version = "0.1.0"
-source = "git+https://github.com/AlbinDalbert/qmstats.git#e1d4534d1b4880338baa329dadbd478dd086e78a"
+source = "git+https://github.com/AlbinDalbert/qmstats.git#cd79ad8b799d9fab8dea1fe1052059a54b002718"
 dependencies = [
  "anyhow",
  "tokio",
