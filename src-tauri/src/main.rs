@@ -14,25 +14,11 @@ fn main() {
 
     println!("program started");
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![process])
+        .invoke_handler(tauri::generate_handler![])
         .setup(|app| {
-            // let app_handle = app_handle();
-            tauri::async_runtime::spawn(async {
-
-                thread::sleep(Duration::new(5,0));
-
-                let (tx, rx) = channel::<Measurement>();
-                let sleep_dur = Duration::new(1, 0);
-            
-                init_measurement_thread(tx, sleep_dur);
-            
-                loop {
-                    
-                    let res = rx.recv().unwrap();
-            
-                    println!("{res:?}");
-            
-                }
+            let app_handle = app.handle();
+            tauri::async_runtime::spawn(async move {
+                update_process(&app_handle);
             });
             Ok(())
         })
@@ -41,33 +27,60 @@ fn main() {
 
 }
 
-#[tauri::command]
-async fn process() {
-    
+
+fn update_process<R: tauri::Runtime>(manager: &impl Manager<R>) {
 
     let (tx, rx) = channel::<Measurement>();
-    let sleep_dur = Duration::new(1, 0);
+    let sleep_dur = Duration::new(1, 500000);
+    let assume = true;
+    init_measurement_thread(tx, sleep_dur, assume);
 
-    init_measurement_thread(tx, sleep_dur);
+    let mut total_memory: f64 = 0.0;
 
     loop {
         
         let res = rx.recv().unwrap();
 
-        println!("{res:?}");
-
+        match res {
+            // Measurement::Temperature(x) => send_to_js("temp", x, manager),
+            Measurement::Memory(x) => send_memory("memory", x, manager),
+            // Measurement::CpuUtil(x) => send_to_js("cpu_util", x, manager),
+            // Measurement::TotalMemory(x) => send_to_js("total_memory", x, manager),
+            // Measurement::Temperature(x) => println!("temp {} C", x),
+            // Measurement::Memory(x) => println!("memory {:.2} GB / {:.2} GB", total_memory - (KiB_to_GiB(x)), total_memory),
+            // Measurement::CpuUtil(x) => println!("cpu {} %", x),
+            // Measurement::TotalMemory(x) => total_memory = KiB_to_GiB(x),
+            _ => println!("res is not temp"),
+        }
+        // println!();
     }
 }
 
-// #[tauri::command]
-// fn init_process(app: App) {
-//     println!("new thread");
-//     std::thread::spawn(move || {
-//         loop {
-//             app.emit_all("new_temp", Payload { message: "Tauri is awesome!".into() }).unwrap();
-//         }
-//     });
-// }
+fn send_to_js<R: tauri::Runtime>(event_id: &str, message: String, manager: &impl Manager<R>) {
+    // info!(?message, event_id);
+    manager
+        .emit_all(event_id, message)
+        .unwrap();
+}
+
+fn send_temp<R: tauri::Runtime>(event_id: &str, message: f64, manager: &impl Manager<R>) {
+    // info!(?message, event_id);
+    manager
+        .emit_all(event_id, message)
+        .unwrap();
+}
 
 
+fn send_memory<R: tauri::Runtime>(event_id: &str, message: f64, manager: &impl Manager<R>) {
+    // info!(?message, event_id);
+    manager
+        .emit_all("memory", qmstats::KiB_to_GiB(message))
+        .unwrap();
+}
 
+fn send_cpu_util<R: tauri::Runtime>(event_id: &str, message: f64, manager: &impl Manager<R>) {
+    // info!(?message, event_id);
+    manager
+        .emit_all(event_id, message)
+        .unwrap();
+}

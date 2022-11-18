@@ -1,6 +1,6 @@
 [package]
 name = "machine-monitor"
-version = "0.0.0"
+version = "0.1.0"
 description = "A Tauri App"
 authors = ["you"]
 license = ""
@@ -17,7 +17,7 @@ tauri-build = { version = "1.1", features = [] }
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 tauri = { version = "1.1", features = ["api-all"] }
-qmstats = { git = "https://github.com/AlbinDalbert/qmstats.git" }
+qmstats = { git = "https://github.com/AlbinDalbert/qmstats.git", branch = "v0.2.0-beta-read-only"}
 
 [features]
 # by default Tauri runs in production mode

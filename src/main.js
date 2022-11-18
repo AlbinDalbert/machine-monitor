@@ -1,20 +1,11 @@
 const { invoke } = window.__TAURI__.tauri;
+const { listen } = window.__TAURI__.event;
+
 
 let tempEl;
 let cpuUtilEl;
 let memoryEl;
-
-async function greet() {
-  // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-  greetMsgEl.textContent = await invoke("greet", { name: greetInputEl.value });
-}
-
-async function update() {
-  console.log("update called");
-  tempEl.textContent = await invoke("process");
-  // cpuUtilEl.textContent = await invoke("get_cpu_util");
-  // memoryEl.textContent = await invoke("get_memory");
-}
+let total_memory = 0.0;
 
 window.addEventListener("DOMContentLoaded", async () => {
   tempEl = document.querySelector("#temp-text");
@@ -24,3 +15,30 @@ window.addEventListener("DOMContentLoaded", async () => {
     .querySelector("#update-button")
     .addEventListener("click", () => update());
 });
+
+
+async function greet() {
+  // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+  greetMsgEl.textContent = await invoke("greet", { name: greetInputEl.value });
+}
+
+
+await listen('temp', (event) => {
+  console.log("js: measure: " + event.payload);
+  tempEl.textContent = event.payload + "°C";
+})
+
+await listen('memory', (event) => {
+  console.log("js: measure: " + event.payload);
+  cpuUtilEl.textContent = event.payload;
+})
+
+await listen('cpu_util', (event) => {
+  console.log("js: measure: " + event.payload);
+  tempEl.textContent = event.payload + "°C";
+})
+
+await listen('total_memory', (event) => {
+  console.log("js: measure: " + event.payload);
+  total_memory = event.payload;
+})
