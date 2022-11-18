@@ -1,6 +1,7 @@
 # Machine Monitor
 
-View temperature and other information about the current machine
+View temperature and other information about the current machine.
+Only Windows is supported
 
 ![image](app.png)
 
