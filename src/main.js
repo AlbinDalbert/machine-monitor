@@ -25,20 +25,15 @@ async function greet() {
 
 await listen('temp', (event) => {
   console.log("js: measure: " + event.payload);
-  tempEl.textContent = event.payload + "°C";
+  tempEl.textContent = event.payload;
 })
 
 await listen('memory', (event) => {
   console.log("js: measure: " + event.payload);
-  cpuUtilEl.textContent = event.payload;
+  memoryEl.textContent = event.payload;
 })
 
 await listen('cpu_util', (event) => {
   console.log("js: measure: " + event.payload);
-  tempEl.textContent = event.payload + "°C";
-})
-
-await listen('total_memory', (event) => {
-  console.log("js: measure: " + event.payload);
-  total_memory = event.payload;
+  cpuUtilEl.textContent = event.payload;
 })

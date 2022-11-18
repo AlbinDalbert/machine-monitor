@@ -7,8 +7,9 @@
 use std::{collections::HashMap, thread, time::{self, Duration}, sync::mpsc::{Sender, SyncSender}};
 use std::sync::mpsc::channel;
 use std::result::Result::Ok;
+use std::fmt;
 use tauri::Manager;
-use qmstats::*;
+use qmstats::{KiB_to_GiB, Measurement, init_measurement_thread};
 
 fn main() {
 
@@ -42,10 +43,10 @@ fn update_process<R: tauri::Runtime>(manager: &impl Manager<R>) {
         let res = rx.recv().unwrap();
 
         match res {
-            // Measurement::Temperature(x) => send_to_js("temp", x, manager),
-            Measurement::Memory(x) => send_memory("memory", x, manager),
-            // Measurement::CpuUtil(x) => send_to_js("cpu_util", x, manager),
-            // Measurement::TotalMemory(x) => send_to_js("total_memory", x, manager),
+            Measurement::Temperature(x) => send_temp("temp", x, manager),
+            Measurement::Memory(x) => send_memory("memory", total_memory - x, total_memory, manager),
+            Measurement::CpuUtil(x) => send_cpu_util("cpu_util", x, manager),
+            Measurement::TotalMemory(x) => total_memory = x,
             // Measurement::Temperature(x) => println!("temp {} C", x),
             // Measurement::Memory(x) => println!("memory {:.2} GB / {:.2} GB", total_memory - (KiB_to_GiB(x)), total_memory),
             // Measurement::CpuUtil(x) => println!("cpu {} %", x),
@@ -65,22 +66,27 @@ fn send_to_js<R: tauri::Runtime>(event_id: &str, message: String, manager: &impl
 
 fn send_temp<R: tauri::Runtime>(event_id: &str, message: f64, manager: &impl Manager<R>) {
     // info!(?message, event_id);
+    let send = format!("{message}°C");
     manager
-        .emit_all(event_id, message)
+        .emit_all(event_id, send)
         .unwrap();
 }
 
 
-fn send_memory<R: tauri::Runtime>(event_id: &str, message: f64, manager: &impl Manager<R>) {
+fn send_memory<R: tauri::Runtime>(event_id: &str, message: f64, total_memory: f64, manager: &impl Manager<R>) {
     // info!(?message, event_id);
+    let memory = KiB_to_GiB(message);
+    let total = KiB_to_GiB(total_memory);
+    let send = format!("{memory:.2} GB / {total:.2} GB");
     manager
-        .emit_all("memory", qmstats::KiB_to_GiB(message))
+        .emit_all("memory", send)
         .unwrap();
 }
 
 fn send_cpu_util<R: tauri::Runtime>(event_id: &str, message: f64, manager: &impl Manager<R>) {
     // info!(?message, event_id);
+    let send = format!("{message}%");
     manager
-        .emit_all(event_id, message)
+        .emit_all(event_id, send)
         .unwrap();
 }
