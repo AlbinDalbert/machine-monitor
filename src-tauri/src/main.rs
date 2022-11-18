@@ -60,7 +60,7 @@ fn send_temp<R: tauri::Runtime>(event_id: &str, message: f64, manager: &impl Man
 fn send_memory<R: tauri::Runtime>(event_id: &str, message: f64, total_memory: f64, manager: &impl Manager<R>) {
     let memory = KiB_to_GiB(message);
     let total = KiB_to_GiB(total_memory);
-    let send = format!("{memory:.2} GB / {total:.2} GB");
+    let send = format!("{memory:.2} /{total:.2}");
     manager
         .emit_all(event_id, send)
         .unwrap();

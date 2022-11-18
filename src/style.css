@@ -128,15 +128,18 @@ button:hover {
   transform: translate(-50%, -50%);
 }
 
+.large-title {
+  font-size: 18px;
+  margin: auto;
+  position: fixed;
+  color:  rgba(255, 255, 255, 0.3);
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .large-text {
   font-size: 60px;
-}
-
-.small-text {
-  font-size: 24px;
-}
-
-.percentage-circle > div {
   margin: auto;
   position: fixed;
   color: rebeccapurple;
@@ -144,3 +147,38 @@ button:hover {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.small-title {
+  font-size: 12px;
+  margin: auto;
+  position: fixed;
+  color:  rgba(255, 255, 255, 0.3);
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.small-text {
+  font-size: 24px;
+  margin: auto;
+  position: fixed;
+  color: rebeccapurple;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#memory-title {
+  top: 30%;
+}
+
+#memory-text {
+  font-size: 18px;
+  margin: auto;
+  position: fixed;
+  color: rebeccapurple;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
