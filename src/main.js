@@ -17,12 +17,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 });
 
 
-async function greet() {
-  // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-  greetMsgEl.textContent = await invoke("greet", { name: greetInputEl.value });
-}
-
-
 await listen('temp', (event) => {
   console.log("js: measure: " + event.payload);
   tempEl.textContent = event.payload;
