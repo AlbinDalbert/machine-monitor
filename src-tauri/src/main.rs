@@ -26,7 +26,6 @@ fn main() {
 
 }
 
-
 fn update_process<R: tauri::Runtime>(manager: &impl Manager<R>) {
 
     let (tx, rx) = channel::<Measurement>();

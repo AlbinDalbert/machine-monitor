@@ -1,10 +1,10 @@
 [package]
 name = "machine-monitor"
-version = "0.1.0"
+version = "0.1.5"
 description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
+authors = ["Albin Dalbert"]
+license = "MIT"
+repository = "https://github.com/AlbinDalbert/machine_monitor"
 edition = "2021"
 rust-version = "1.57"
 
