@@ -2,10 +2,9 @@
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
-use std::{collections::HashMap, thread, time::{self, Duration}, sync::mpsc::{Sender, SyncSender}};
+use std::{time::Duration};
 use std::sync::mpsc::channel;
 use std::result::Result::Ok;
-use std::fmt;
 use tauri::Manager;
 use qmstats::{KiB_to_GiB, Measurement, init_measurement_thread};
 
