@@ -1,6 +1,9 @@
 # Machine Monitor
 
+Executable binary exist in releases --->
+
 View temperature and other information about the current machine.
+
 Only Windows is supported
 
 ![image](app.png)
