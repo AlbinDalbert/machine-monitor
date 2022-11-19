@@ -115,9 +115,8 @@ button:hover {
 
 @keyframes circle-animation {
   0% {border-color: rebeccapurple;}
-  25% {border-color: rebeccapurple;}
-  50% {border-color: rgb(194, 72, 255);}
-  80% {border-color: rebeccapurple;}
+  20% {border-color: rebeccapurple;}
+  50% {border-color: rgb(181, 34, 255);}
   100% {border-color: rebeccapurple;}
   /* to {border-color: yellow;} */
 }
@@ -125,7 +124,7 @@ button:hover {
 .circle {
   height: 90%;
   width: 90%;
-  background-color: rgba(255, 255, 255, 0.0);
+  background-color: rgba(255, 255, 255, 0);
   border-radius: 50%;
   border-color: aliceblue;
   border-width: 10px;

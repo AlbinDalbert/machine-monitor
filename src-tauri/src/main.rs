@@ -28,7 +28,7 @@ fn main() {
 fn update_process<R: tauri::Runtime>(manager: &impl Manager<R>) {
 
     let (tx, rx) = channel::<Measurement>();
-    let sleep_dur = Duration::new(2, 0);
+    let sleep_dur = Duration::new(0,500000);
     let assume = true;
     init_measurement_thread(tx, sleep_dur, assume);
 
