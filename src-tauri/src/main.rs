@@ -33,6 +33,7 @@ fn update_process<R: tauri::Runtime>(manager: &impl Manager<R>) {
     init_measurement_thread(tx, sleep_dur, assume);
 
     let mut total_memory: f64 = 0.0;
+    let mut total_vram: f64 = 0.0;
 
     loop {
         
@@ -43,8 +44,11 @@ fn update_process<R: tauri::Runtime>(manager: &impl Manager<R>) {
             Measurement::Memory(x) => send_memory("memory", total_memory - x, total_memory, manager),
             Measurement::CpuUtil(x) => send_cpu_util("cpu_util", x, manager),
             Measurement::TotalMemory(x) => total_memory = x,
-
-            _ => eprintln!("unhandled measurement"),
+            Measurement::VramTotal(x) => total_vram = x as f64,
+            Measurement::VramUsed(x) => send_vram_usage("vram",  x as f64, total_vram, manager),
+            Measurement::GpuUtil(x) => send_gpu_util("gpu_util", x, manager),
+            Measurement::GpuTemp(x) => send_gpu_temp("gpu_temp", x, manager),
+            x => eprintln!("undefined measurement: {:?}", x),
         }
     }
 }
@@ -56,6 +60,31 @@ fn send_temp<R: tauri::Runtime>(event_id: &str, message: f64, manager: &impl Man
         .unwrap();
 }
 
+fn send_vram_usage<R: tauri::Runtime>(event_id: &str, message: f64, total_vram: f64, manager: &impl Manager<R>) {
+    let vram = KiB_to_GiB(message);
+    let total = KiB_to_GiB(total_vram);
+    let send = format!("{vram:.2} /{total:.2}");
+    manager
+        .emit_all(event_id, send)
+        .unwrap();
+}
+
+fn send_gpu_util<R: tauri::Runtime>(event_id: &str, message: u32, manager: &impl Manager<R>) {
+    if message == 0 {
+        return
+    }
+    let send = format!("{message}%");
+    manager
+        .emit_all(event_id, send)
+        .unwrap();
+}
+
+fn send_gpu_temp<R: tauri::Runtime>(event_id: &str, message: u32, manager: &impl Manager<R>) {
+    let send = format!("{message}°C");
+    manager
+        .emit_all(event_id, send)
+        .unwrap();
+}
 
 fn send_memory<R: tauri::Runtime>(event_id: &str, message: f64, total_memory: f64, manager: &impl Manager<R>) {
     let memory = KiB_to_GiB(message);
@@ -67,6 +96,9 @@ fn send_memory<R: tauri::Runtime>(event_id: &str, message: f64, total_memory: f6
 }
 
 fn send_cpu_util<R: tauri::Runtime>(event_id: &str, message: f64, manager: &impl Manager<R>) {
+    if message == 0.0 {
+        return
+    }
     let send = format!("{message}%");
     manager
         .emit_all(event_id, send)

@@ -193,3 +193,16 @@ button:hover {
   transform: translate(-50%, -50%);
 }
 
+#vram-title {
+  top: 30%;
+}
+
+#vram-text {
+  font-size: 18px;
+  margin: auto;
+  position: fixed;
+  color: rebeccapurple;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
