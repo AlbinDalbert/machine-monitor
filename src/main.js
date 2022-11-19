@@ -26,6 +26,11 @@ window.addEventListener("DOMContentLoaded", async () => {
 await listen('temp', (event) => {
   console.log("js: measure: " + event.payload);
   tempEl.textContent = event.payload;
+  if (parseInt(event.payload.substring(0, event.payload.length)) > 95) {
+    tempEl.style.color = "red";
+  } else {
+    tempEl.style.color = "rebeccapurple";
+  }
 })
 
 await listen('memory', (event) => {
