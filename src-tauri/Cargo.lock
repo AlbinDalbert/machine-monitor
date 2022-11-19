@@ -1548,7 +1548,7 @@ dependencies = [
 
 [[package]]
 name = "machine-monitor"
-version = "0.1.5"
+version = "0.7.2"
 dependencies = [
  "qmstats",
  "serde",
