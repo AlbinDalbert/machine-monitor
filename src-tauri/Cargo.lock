@@ -2224,7 +2224,7 @@ dependencies = [
 [[package]]
 name = "qmstats"
 version = "0.5.0"
-source = "git+https://github.com/AlbinDalbert/qmstats.git#6490d91310f3eb18b12608838853c4bd654b1021"
+source = "git+https://github.com/AlbinDalbert/qmstats.git#44e4400db191d126c084c61f4ceee7477dfd501d"
 dependencies = [
  "anyhow",
  "nvml-wrapper",
