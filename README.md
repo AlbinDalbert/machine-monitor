@@ -6,7 +6,7 @@ View temperature and other information about the current machine.
 
 Only Windows is supported and NVidia card for graphics information
 
-![image](app.gif))
+![image](app.gif)
 
 ## Compilation
 This project is built with Tauri, to compile it follow the setup steps for tauri using `cargo` on https://tauri.app/.
