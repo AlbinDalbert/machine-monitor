@@ -11,8 +11,11 @@ Only Windows is supported and NVidia card for graphics information
 ## Compilation
 This project is built with Tauri, to compile it follow the setup steps for tauri using `cargo` on https://tauri.app/.
 To build a development build use the following command:
+
 ```$ cargo tauri dev```
+
 To build a release build use the following:
+
 ```$ cargo tauri build```
 
 ## Back-end
