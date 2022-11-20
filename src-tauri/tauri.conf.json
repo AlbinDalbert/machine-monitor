@@ -50,7 +50,7 @@
       {
         "fullscreen": false,
         "height": 620,
-        "resizable": true,
+        "resizable": false,
         "title": "Machine Monitor",
         "width": 620
       }

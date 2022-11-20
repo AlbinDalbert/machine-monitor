@@ -114,10 +114,10 @@ button:hover {
 }
 
 @keyframes circle-animation {
-  0% {border-color: rebeccapurple;}
-  20% {border-color: rebeccapurple;}
-  50% {border-color: rgb(181, 34, 255);}
-  100% {border-color: rebeccapurple;}
+  0% {border-color: rebeccapurple; box-shadow: 0px 0px 0px 0px rgb(181, 34, 255);}
+  20% {border-color: rebeccapurple; box-shadow: 0px 0px 0px 0px rgb(181, 34, 255);}
+  50% {border-color: rgb(181, 34, 255); box-shadow: 0px 0px 8px 4px rgb(181, 34, 255);}
+  100% {border-color: rebeccapurple; box-shadow: 0px 0px 0px 0px rgb(181, 34, 255);}
   /* to {border-color: yellow;} */
 }
 
@@ -130,8 +130,9 @@ button:hover {
   border-width: 10px;
   border-style: solid;
   animation-name: circle-animation;
-  animation-duration: 2s;
+  animation-duration: 4s;
   animation-iteration-count: infinite;
+  box-shadow: 0px 0px 0px 0px rebeccapurple;
   margin: 0;
   position: relative;
   top: 50%;
