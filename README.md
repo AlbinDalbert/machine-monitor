@@ -31,3 +31,4 @@ To build a release build use the following:
 As mentioned above, atm the program only works on Windows and with Nvidia cards.
 Yet, I have encountered problem with reading the temperature on a laptop. 
 All other stats work, I think it's the WMI connection that doesn't really work.
+Also, the handling of the WMI connection isn't great and needs to be looked at.
