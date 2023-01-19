@@ -4,7 +4,7 @@ Executable binary and installation (.msi) exist in releases --->
 
 View temperature and other information about the current machine.
 
-Only Windows is supported and NVidia card for graphics information
+Only Windows is supported and Nvidia for graphics information
 
 ![image](app.gif)
 
@@ -26,3 +26,8 @@ To build a development build use the following command:
 To build a release build use the following:
 
 ```$ cargo tauri build```
+
+## Known Problems
+As mentioned above, atm the program only works on Windows and with Nvidia cards.
+Yet, I have encountered problem with reading the temperature on a laptop. 
+All other stats work, I think it's the WMI connection that doesn't really work.
