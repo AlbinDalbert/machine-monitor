@@ -29,8 +29,7 @@ fn update_process<R: tauri::Runtime>(manager: &impl Manager<R>) {
 
     let (tx, rx) = channel::<Measurement>();
     let sleep_dur = Duration::new(0,500000);
-    let assume = true;
-    init_measurement_thread(tx, sleep_dur, assume);
+    init_measurement_thread(tx, sleep_dur);
 
     let mut total_memory: f64 = 0.0;
     let mut total_vram: f64 = 0.0;
