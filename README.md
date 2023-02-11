@@ -8,6 +8,10 @@ Only Windows is supported and Nvidia for graphics information
 
 ![image](app.gif)
 
+## Hardware Limitation
+This program is specifically designed to work on windows machines with Nvidia graphicscards.
+This might expand in the future.
+
 ## Summary
 
 ### Front-End
@@ -27,8 +31,4 @@ To build a release build use the following:
 
 ```$ cargo tauri build```
 
-## Known Problems
-As mentioned above, atm the program only works on Windows and with Nvidia cards.
-Yet, I have encountered problem with reading the temperature on a laptop. 
-All other stats work, I think it's the WMI connection that doesn't really work.
-Also, the handling of the WMI connection isn't great and needs to be looked at.
+
