@@ -36,7 +36,10 @@ fn update_process<R: tauri::Runtime>(manager: &impl Manager<R>) {
 
     loop {
         
-        let res = rx.recv().unwrap();
+        let res = match rx.recv() {
+            Ok(x) => x,
+            Err(_) => break,
+        };
 
         match res {
             Measurement::Temperature(x) => send_temp("temp", x, manager),
@@ -54,18 +57,20 @@ fn update_process<R: tauri::Runtime>(manager: &impl Manager<R>) {
 
 fn send_temp<R: tauri::Runtime>(event_id: &str, message: f64, manager: &impl Manager<R>) {
     let send = format!("{message}°C");
-    manager
-        .emit_all(event_id, send)
-        .unwrap();
+    match manager.emit_all(event_id, send) {
+        Ok(_) => (),
+        Err(_) => (),
+    };
 }
 
 fn send_vram_usage<R: tauri::Runtime>(event_id: &str, message: f64, total_vram: f64, manager: &impl Manager<R>) {
     let vram = KiB_to_GiB(message);
     let total = KiB_to_GiB(total_vram);
     let send = format!("{vram:.2} /{total:.2}");
-    manager
-        .emit_all(event_id, send)
-        .unwrap();
+    match manager.emit_all(event_id, send) {
+            Ok(_) => (),
+            Err(_) => (),
+    };
 }
 
 fn send_gpu_util<R: tauri::Runtime>(event_id: &str, message: u32, manager: &impl Manager<R>) {
@@ -73,25 +78,28 @@ fn send_gpu_util<R: tauri::Runtime>(event_id: &str, message: u32, manager: &impl
         return
     }
     let send = format!("{message}%");
-    manager
-        .emit_all(event_id, send)
-        .unwrap();
+    match manager.emit_all(event_id, send) {
+            Ok(_) => (),
+            Err(_) => (),
+    };
 }
 
 fn send_gpu_temp<R: tauri::Runtime>(event_id: &str, message: u32, manager: &impl Manager<R>) {
     let send = format!("{message}°C");
-    manager
-        .emit_all(event_id, send)
-        .unwrap();
+    match manager.emit_all(event_id, send) {
+        Ok(_) => (),
+        Err(_) => (),
+    };
 }
 
 fn send_memory<R: tauri::Runtime>(event_id: &str, message: f64, total_memory: f64, manager: &impl Manager<R>) {
     let memory = KiB_to_GiB(message);
     let total = KiB_to_GiB(total_memory);
     let send = format!("{memory:.2} /{total:.2}");
-    manager
-        .emit_all(event_id, send)
-        .unwrap();
+    match manager.emit_all(event_id, send) {
+        Ok(_) => (),
+        Err(_) => (),
+    };
 }
 
 fn send_cpu_util<R: tauri::Runtime>(event_id: &str, message: f64, manager: &impl Manager<R>) {
@@ -99,7 +107,8 @@ fn send_cpu_util<R: tauri::Runtime>(event_id: &str, message: f64, manager: &impl
         return
     }
     let send = format!("{message}%");
-    manager
-        .emit_all(event_id, send)
-        .unwrap();
+    match manager.emit_all(event_id, send) {
+            Ok(_) => (),
+            Err(_) => (),
+    };
 }
