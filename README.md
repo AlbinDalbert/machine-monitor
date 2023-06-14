@@ -1,8 +1,8 @@
 # Machine Monitor
+This is a minimal monitor program which has the goal to use as little resources as possible
+View temperature and other information about the current machine.
 
 Executable binary and installation (.msi) exist in releases --->
-
-View temperature and other information about the current machine.
 
 Only Windows is supported and Nvidia for graphics information
 
