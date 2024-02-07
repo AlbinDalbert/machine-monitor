@@ -2,7 +2,7 @@
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
-use std::{time::Duration};
+use std::time::Duration;
 use std::sync::mpsc::channel;
 use std::result::Result::Ok;
 use tauri::Manager;
@@ -55,8 +55,8 @@ fn update_process<R: tauri::Runtime>(manager: &impl Manager<R>) {
     }
 }
 
-fn send_temp<R: tauri::Runtime>(event_id: &str, message: f64, manager: &impl Manager<R>) {
-    let send = format!("{message:.1}°C");
+fn send_temp<R: tauri::Runtime>(event_id: &str, message: i32, manager: &impl Manager<R>) {
+    let send = format!("{message}°C");
     match manager.emit_all(event_id, send) {
         Ok(_) => (),
         Err(_) => (),
