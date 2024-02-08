@@ -6,12 +6,36 @@ use std::time::Duration;
 use std::sync::mpsc::channel;
 use std::result::Result::Ok;
 use tauri::Manager;
+use tauri::{CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem};
+use tauri::{Menu, MenuItem, Submenu};
 use qmstats::{KiB_to_GiB, Measurement, init_measurement_thread};
 
 fn main() {
+    
+    // here `"quit".to_string()` defines the menu item id, and the second parameter is the menu item label.
+    let quit = CustomMenuItem::new("quit".to_string(), "Quit");
+    let close = CustomMenuItem::new("close".to_string(), "Close");
+    let submenu = Submenu::new("File", Menu::new().add_item(quit).add_item(close));
+    let menu = Menu::new()
+        .add_item(CustomMenuItem::new("hide", "Hide"))
+        .add_submenu(submenu);
 
+    let quit = CustomMenuItem::new("quit".to_string(), "Quit");
+    let hide = CustomMenuItem::new("hide".to_string(), "Hide");
+    let tray_menu = SystemTrayMenu::new()
+        .add_item(quit)
+        .add_native_item(SystemTrayMenuItem::Separator)
+        .add_item(hide);
+
+    let tray_menu = SystemTrayMenu::new(); // insert the menu items here
+    let system_tray = SystemTray::new()
+        .with_menu(tray_menu);
+
+    
     println!("program started");
     tauri::Builder::default()
+        //.menu(menu)
+        .system_tray(system_tray)
         .invoke_handler(tauri::generate_handler![])
         .setup(|app| {
             let app_handle = app.handle();

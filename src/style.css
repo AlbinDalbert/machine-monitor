@@ -5,7 +5,6 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-
   color: #0f0f0f;
   background-color: #252525;
 
@@ -14,6 +13,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0%;
 }
 
 @font-face {
@@ -37,8 +40,8 @@
 
 #temp {
   grid-area: temp;
-  height: 400px;
-  width: 400px;
+  height: 100%;
+  width: 100%;
 }
 
 #cpu-util {
@@ -85,9 +88,9 @@ button:hover {
 } */
 
 .main {
-  position: absolute;
-  top: 10px;
-  left: 10px;
+  position:absolute;
+  /* padding: 0.5%; */
+  margin: 0px;
   display: grid;
   grid-area: main;
   grid-template-columns: 1fr 1fr 1fr ;
@@ -98,15 +101,16 @@ button:hover {
   'network gpu button';
   background-color: rgba(255, 255, 255, 0.0);
   text-align: center;
-  width: fit-content;
-  height: fit-content;
+  width: 100%;
+  height: 100%;
   font-size: 15px;
 }
 
 .monitor-view {
-  height: 200px;
-  width: 200px;
+  height: 100%;
+  width: 100%;
   text-align: center;
+  margin: auto;
   
   border-color: #252525;
   border-style: solid;

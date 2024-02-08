@@ -11,7 +11,22 @@
     "version": "0.9.0"
   },
   "tauri": {
+    "systemTray": {
+      "iconPath": "icons/icon32.png",
+      "iconAsTemplate": true
+    },
     "allowlist": {
+      "window": {
+        "all": false,
+        "close": true,
+        "hide": true,
+        "show": true,
+        "maximize": true,
+        "minimize": true,
+        "unmaximize": true,
+        "unminimize": true,
+        "startDragging": true
+      },
       "all": true
     },
     "bundle": {
@@ -49,10 +64,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 620,
-        "resizable": false,
-        "title": "Machine Monitor",
-        "width": 620
+        "height": 720,
+        "resizable": true,
+        "title": "Machine Monitor v.0.9.0",
+        "width": 720
       }
     ]
   }
