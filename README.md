@@ -32,10 +32,10 @@ To build a release build use the following:
 ```$ cargo tauri build```
 
 ### TODO
-[ ] logging (when installed, not when binary)
-[ ] add config file
-[ ] posibility to change refresh rate
-[ ] about page
-[ ] display version in UI
+- [ ] logging (when installed, not when binary)
+- [ ] add config file
+- [ ] posibility to change refresh rate
+- [ ] about page
+- [ ] display version in UI
 
 
