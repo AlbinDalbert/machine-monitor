@@ -16,16 +16,8 @@
       "iconAsTemplate": true
     },
     "allowlist": {
-      "window": {
-        "all": false,
-        "close": true,
-        "hide": true,
-        "show": true,
-        "maximize": true,
-        "minimize": true,
-        "unmaximize": true,
-        "unminimize": true,
-        "startDragging": true
+      "notification": {
+        "all": true
       },
       "all": true
     },
@@ -64,10 +56,11 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 720,
-        "resizable": true,
+        "resizable": false,
         "title": "Machine Monitor v.0.9.0",
-        "width": 720
+        "height": 620,
+        "width": 620,
+        "theme" :"Dark"
       }
     ]
   }

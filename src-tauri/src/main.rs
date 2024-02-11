@@ -7,19 +7,11 @@ use std::sync::mpsc::channel;
 use std::result::Result::Ok;
 use tauri::Manager;
 use tauri::{CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem};
-use tauri::{Menu, MenuItem, Submenu};
 use qmstats::{KiB_to_GiB, Measurement, init_measurement_thread};
 
 fn main() {
-    
-    // here `"quit".to_string()` defines the menu item id, and the second parameter is the menu item label.
-    let quit = CustomMenuItem::new("quit".to_string(), "Quit");
-    let close = CustomMenuItem::new("close".to_string(), "Close");
-    let submenu = Submenu::new("File", Menu::new().add_item(quit).add_item(close));
-    let menu = Menu::new()
-        .add_item(CustomMenuItem::new("hide", "Hide"))
-        .add_submenu(submenu);
 
+  // here `"quit".to_string()` defines the menu item id, and the second parameter is the menu item label.
     let quit = CustomMenuItem::new("quit".to_string(), "Quit");
     let hide = CustomMenuItem::new("hide".to_string(), "Hide");
     let tray_menu = SystemTrayMenu::new()
@@ -27,15 +19,36 @@ fn main() {
         .add_native_item(SystemTrayMenuItem::Separator)
         .add_item(hide);
 
-    let tray_menu = SystemTrayMenu::new(); // insert the menu items here
     let system_tray = SystemTray::new()
-        .with_menu(tray_menu);
-
+      .with_menu(tray_menu);
     
     println!("program started");
     tauri::Builder::default()
-        //.menu(menu)
         .system_tray(system_tray)
+        .on_system_tray_event(|app, event| match event {
+            SystemTrayEvent::LeftClick {
+              position: _,
+              size: _,
+              ..
+            } => {
+              println!("system tray received a left click");
+              let window = app.get_window("main").unwrap();
+              window.show().unwrap();
+            }
+            SystemTrayEvent::MenuItemClick { id, .. } => {
+              match id.as_str() {
+                "quit" => {
+                  std::process::exit(0);
+                }
+                "hide" => {
+                  let window = app.get_window("main").unwrap();
+                  window.hide().unwrap();
+                }
+                _ => {}
+              }
+            }
+            _ => {}
+        })
         .invoke_handler(tauri::generate_handler![])
         .setup(|app| {
             let app_handle = app.handle();
